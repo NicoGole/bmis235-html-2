@@ -1,142 +1,154 @@
 <!DOCTYPE html>
-<!--
-  Author: YOUR NAME
-  GU username: YOUR-GU-USERNAME
-  Course: BMIS 235 - HTML-2
--->
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="author" content="YOUR NAME">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Nico Golesis">
+  <title>John Correia's Podcasts</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 32px 6%;
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
 
-<!-- this is the title that shows up on the tab of a web browser -->
-<title>John Correia's Podcasts</title>
+    body.dark {
+      background: #121212;
+      color: #f0f0f0;
+    }
 
-<style>
-body { font-family: Arial, sans-serif; margin: 0; padding: 0 20px; }
-h1   { text-align: center; }
-h2   { text-align: center; }
-a    { color: inherit; }
+    .theme-toggle {
+      font-size: 0.9rem;
+      padding: 6px 14px;
+      cursor: pointer;
+      border: 1px solid currentColor;
+      background: none;
+      color: inherit;
+      border-radius: 4px;
+    }
 
-ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: center;
-}
+    .picks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin: 32px 0;
+    }
 
-/* the bottom section: always the opposite color of the page */
-#embed-block {
-    margin: 50px -20px 0;
-    padding: 30px 20px 40px;
-    text-align: center;
-}
-</style>
+    .picks a img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .picks h3 {
+      text-align: center;
+      font-size: 1rem;
+      margin: 0 0 8px;
+    }
+
+    section.episode {
+      scroll-margin-top: 24px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(128, 128, 128, 0.3);
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border: 0;
+    }
+
+    .to-top {
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    footer {
+      margin-top: 48px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
 </head>
+<body id="top">
 
-<body>
+  <button class="theme-toggle" id="themeToggle" type="button">Dark mode on</button>
 
-<!-- ===================== DARK MODE BUTTON ===================== -->
-<!-- Clicking it runs toggleDark(), a tiny program at the bottom   -->
-<!-- of this file.                                                 -->
-<p style="text-align: center;"><button onclick="toggleDark()">Dark mode on / off</button></p>
+  <h1>Professor Correia's Podcasts</h1>
+  <p>Email me at <a href="mailto:correia@gonzaga.edu">correia@gonzaga.edu</a> for episode suggestions.</p>
 
-<a id="top"></a>
+  <nav class="picks">
+    <div>
+      <h3>For the Mind</h3>
+      <a href="#findingmastery">
+        <img src="gervais.jpg" alt="Michael Gervais">
+      </a>
+    </div>
+    <div>
+      <h3>For the Body</h3>
+      <a href="#huberman-lab">
+        <img src="huberman.jpg" alt="Andrew Huberman">
+      </a>
+    </div>
+    <div>
+      <h3>For the Craft</h3>
+      <a href="#fridman">
+        <img src="fridman.jpg" alt="Lex Fridman">
+      </a>
+    </div>
+  </nav>
 
-<h1>Professor Correia's Podcasts</h1>
-<p style="text-align: center;">Email me at correia@gonzaga.edu for episode suggestions</p>
+  <section class="episode" id="findingmastery">
+    <h2><a href="https://www.youtube.com/@FindingMastery">Finding Mastery</a></h2>
+    <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw"
+      title="Finding Mastery"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    <a class="to-top" href="#top">To top</a>
+  </section>
 
-<!-- ===================== MENU OF IMAGES ===================== -->
-<!-- Click an image and it jumps down to its video.            -->
-<!-- MIND works. Use it as your model.                         -->
-<ul>
+  <section class="episode" id="huberman-lab">
+    <h2><a href="https://www.youtube.com/@hubermanlab">Huberman Lab</a></h2>
+    <iframe src="https://www.youtube.com/embed/pq6WHJzOkno"
+      title="Huberman Lab"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    <a class="to-top" href="#top">To top</a>
+  </section>
 
-    <li><h2>For the Mind</h2></li>
-    <li><a href="#findingmastery"><img src="gervais.jpg" width="400" height="400" alt="Michael Gervais"></a></li>
+  <section class="episode" id="fridman">
+    <h2><a href="https://www.youtube.com/@lexfridman">Lex Fridman Podcast</a></h2>
+    <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc"
+      title="Lex Fridman Podcast"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+    <a class="to-top" href="#top">To top</a>
+  </section>
 
-    <li><h2>For the Body</h2></li>
-    <li><a href="#huberman-lab"><img src="Huberman.jpg" width="400" height="400" alt="Andrew Huberman"></a></li>
+  <section class="episode" id="my-embed">
+    <h2>My Embed</h2>
+    <!-- Paste an embed iframe from another site here, such as a Google Maps or chart embed. -->
+    <a class="to-top" href="#top">To top</a>
+  </section>
 
-    <li><h2>For the Craft</h2></li>
-    <li><a href="#fridman"><img src="fridman.jpg" width="400" height="400" alt="Lex Fridman"></a></li>
+  <footer>Built by Nico Golesis · BMIS 235</footer>
 
-</ul>
-
-<!-- ===================== VIDEO SECTIONS ===================== -->
-
-<!-- MIND: Finding Mastery -->
-<a id="findingmastery"></a>
-<a href="https://www.youtube.com/@FindingMastery">
-<h2>Finding Mastery</h2>
-</a>
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4L98ssI5Vxw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</center>
-
-<!-- BODY: Huberman Lab -->
-<a id="huberman"></a>
-<a href="https://www.youtube.com/@hubermanlab">
-<h2>Huberman Lab</h2>
-</a>
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pq6WHJzOkno" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</center>
-
-<!-- CRAFT: Lex Fridman Podcast -->
-<a id="fridman"></a>
-<a href="https://www.youtube.com/@lexfridman">
-<h2>Lex Fridman Podcast</h2>
-</a>
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=kFQUDCgMjRc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</center>
-
-<p style="font-size: small; text-align: center;"><a href="#top">To top</a></p>
-
-<!-- ===================== YOUR EMBED BLOCK ===================== -->
-<!-- This section is always the opposite color of the page.      -->
-<!-- 1. Pick ONE: a Google Map, or an Our World in Data chart.    -->
-<!-- 2. Copy its embed code (it starts with <iframe).             -->
-<!-- 3. Paste it on the empty line below the heading.             -->
-<!-- 4. Change the heading to say what it is.                     -->
-<section id="embed-block">
-<h2>My embed</h2>
-
-</section>
-
-<!-- Footer: fill in your name -->
-<p style="text-align: center;">Built by YOUR NAME &middot; BMIS 235</p>
-
-
-<!-- ===================== DARK MODE SCRIPT ===================== -->
-<script>
-  // 1. Your two colors. Change these to your own.
-  var lightColor = "#f2f2f2";
-  var darkColor  = "#222222";
-
-  // 2. Which mode the page is in right now
-  var dark = false;
-
-  // 3. Paint the page one color and the embed block the other
-  function paint() {
-    var pageColor  = dark ? darkColor  : lightColor;
-    var blockColor = dark ? lightColor : darkColor;
-    document.body.style.backgroundColor = pageColor;
-    document.body.style.color = dark ? "white" : "black";
-    var block = document.getElementById("embed-block");
-    block.style.backgroundColor = blockColor;
-    block.style.color = dark ? "black" : "white";
-  }
-
-  // 4. When the button is clicked: flip the mode, then repaint
-  function toggleDark() {
-    dark = !dark;
-    paint();
-  }
-
-  // 5. Paint once when the page first loads
-  paint();
-</script>
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const dark = document.body.classList.toggle('dark');
+      toggle.textContent = dark ? 'Light mode on' : 'Dark mode on';
+    });
+  </script>
 
 </body>
 </html>

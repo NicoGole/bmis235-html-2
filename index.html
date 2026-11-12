@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Nico Golesis">
-  <title>John Correia's Podcasts</title>
+  <title>Nico Golesis | Correia Podcasts</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -14,10 +14,8 @@
     }
 
     body.dark {
-      --bg: #161616;
-      --text: #eeeeee;
-      --muted: #999999;
-      --line: #333333;
+      --muted: #a9b4c2;
+      --line: #34445a;
     }
 
     body {
@@ -99,7 +97,8 @@
       aspect-ratio: 16 / 9;
     }
 
-    .video iframe {
+    .video iframe,
+    .map-embed iframe {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -107,13 +106,20 @@
       border: 0;
     }
 
-    .map img {
+    .map-embed {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    .map-photo img {
       display: block;
       width: 100%;
       height: auto;
+      margin-top: 24px;
     }
 
-    .map figcaption {
+    .map-photo figcaption {
       margin-top: 10px;
       font-size: 0.9rem;
       color: var(--muted);
@@ -202,9 +208,14 @@
     <a class="back" href="#top">↑ Back to top</a>
   </section>
 
-  <section id="myembed" class="map reveal">
-    <h2>Where I study: Gonzaga University</h2>
-    <figure style="margin: 0;">
+  <section id="myembed" class="reveal">
+    <h2>Where I study: Gonzaga University on Google Maps</h2>
+    <div class="map-embed">
+      <iframe src="https://maps.google.com/maps?q=Gonzaga+University,+Spokane,+WA&output=embed"
+        title="Google Map of Gonzaga University in Spokane, Washington"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <figure class="map-photo" style="margin: 30px 0 0;">
       <img src="gonzaga%20map.jpg" alt="Map of the Gonzaga University campus in Spokane, Washington, with the Gonzaga campus inset and Lake Arthur">
       <figcaption>Gonzaga University campus map</figcaption>
     </figure>
@@ -214,9 +225,20 @@
   <footer>Built by Nico Golesis · BMIS 235</footer>
 
   <script>
+    // Dark mode colors: change these two to make the dark theme your own
+    const DARK_BG = '#1e2a3a';
+    const DARK_TEXT = '#f4e9d8';
+
     const toggle = document.getElementById('themeToggle');
     toggle.addEventListener('click', () => {
       const dark = document.body.classList.toggle('dark');
+      if (dark) {
+        document.body.style.background = DARK_BG;
+        document.body.style.color = DARK_TEXT;
+      } else {
+        document.body.style.background = '';
+        document.body.style.color = '';
+      }
       toggle.textContent = dark ? 'Dark mode off' : 'Dark mode on';
     });
 

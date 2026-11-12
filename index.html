@@ -5,188 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Nico Golesis">
   <title>John Correia's Podcasts</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f4ee;
-      --surface: #ffffff;
-      --text: #1c1a17;
-      --muted: #6e675d;
-      --accent: #c2410c;
-      --border: rgba(28, 26, 23, 0.1);
-      --shadow: 0 12px 30px rgba(28, 26, 23, 0.08);
-      --speed: 0.4s;
+      --bg: #ffffff;
+      --text: #222222;
+      --muted: #777777;
+      --line: #e5e5e5;
     }
 
     body.dark {
-      --bg: #0f0f10;
-      --surface: #19191b;
-      --text: #f3efe8;
-      --muted: #a39d94;
-      --accent: #fb923c;
-      --border: rgba(243, 239, 232, 0.1);
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      --bg: #161616;
+      --text: #eeeeee;
+      --muted: #999999;
+      --line: #333333;
     }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
+      padding: 40px 20px 60px;
       background: var(--bg);
       color: var(--text);
-      font-family: "Inter", Arial, Helvetica, sans-serif;
-      font-weight: 300;
-      line-height: 1.65;
-      transition: background var(--speed) ease, color var(--speed) ease;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
-    a:hover { text-decoration: underline; }
+    a { color: inherit; }
 
-    h1, h2 {
-      font-family: "Playfair Display", Georgia, serif;
-      font-weight: 400;
-      line-height: 1.15;
-      margin: 0;
-    }
-
-    /* ---------- Header ---------- */
-    .hero {
-      position: relative;
-      padding: 90px 6% 80px;
+    header {
+      max-width: 800px;
+      margin: 0 auto 40px;
       text-align: center;
-      background: linear-gradient(135deg, #1c1a17 0%, #3b1a12 55%, #c2410c 140%);
-      color: #f7f4ee;
-      overflow: hidden;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -10% -60% auto;
-      width: 480px;
-      height: 480px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(251, 146, 60, 0.35), transparent 70%);
-      pointer-events: none;
-    }
+    h1 { font-weight: 600; margin: 0 0 10px; }
+    header p { color: var(--muted); margin: 0 0 16px; }
 
-    .hero .eyebrow {
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin: 0 0 16px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      margin-bottom: 18px;
-    }
-
-    .hero p { margin: 0 0 28px; opacity: 0.85; }
-    .hero a { color: #fdba74; }
-
-    .theme-toggle {
+    button {
       font: inherit;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #f7f4ee;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: none;
+      color: var(--text);
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    .theme-toggle:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: translateY(-1px);
-    }
-
-    /* ---------- Categories ---------- */
+    /* Category picks */
     .picks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      max-width: 1000px;
-      margin: -50px auto 90px;
-      padding: 0 6%;
-      position: relative;
-      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 60px;
     }
 
     .pick {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 26px 20px 22px;
+      width: 200px;
       text-align: center;
-      box-shadow: var(--shadow);
-      transition: transform var(--speed) ease, box-shadow var(--speed) ease;
     }
 
-    .pick:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
-    }
-
-    .pick .label {
-      display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
+    .pick h2 {
+      font-size: 0.85rem;
       text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .pick a.thumb {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 14px;
-      overflow: hidden;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 0 0 12px;
     }
 
     .pick img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       display: block;
-      transition: transform 0.6s ease;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
-    .pick:hover img { transform: scale(1.06); }
-
-    /* ---------- Episode and map cards ---------- */
-    .card {
-      max-width: 880px;
-      margin: 0 auto 60px;
-      padding: 36px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      scroll-margin-top: 30px;
+    /* Episode and map sections */
+    section {
+      max-width: 800px;
+      margin: 0 auto 50px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 20px;
     }
 
-    .card h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-bottom: 22px; }
-    .card h2 a { color: var(--text); }
-    .card h2 a:hover { color: var(--accent); text-decoration: none; }
+    section h2 { font-size: 1.5rem; margin: 0 0 18px; }
 
     .video {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #000;
     }
 
     .video iframe {
@@ -197,127 +107,108 @@
       border: 0;
     }
 
-    .card .to-top {
-      display: inline-block;
-      margin-top: 22px;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .card .to-top:hover { color: var(--accent); }
-
-    .map-card img {
+    .map img {
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 14px;
-      border: 1px solid var(--border);
     }
 
-    .map-card figcaption {
-      margin-top: 14px;
+    .map figcaption {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      text-align: center;
       font-size: 0.85rem;
       color: var(--muted);
-      text-align: center;
     }
 
-    /* ---------- Footer ---------- */
-    footer {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 28px 0 10px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ---------- Fade in on scroll ---------- */
+    /* Fade in */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.6s ease;
     }
 
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ---------- Small screens ---------- */
-    @media (max-width: 800px) {
-      .picks { grid-template-columns: 1fr; margin-top: -40px; }
-      .card { padding: 22px; }
-    }
+    .reveal.visible { opacity: 1; }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
-      .reveal { opacity: 1; transform: none; }
+      .reveal { opacity: 1; transition: none; }
     }
   </style>
 </head>
 <body id="top">
 
-  <header class="hero">
-    <p class="eyebrow">Episode picks</p>
+  <header>
     <h1>Professor Correia's Podcasts</h1>
     <p>Email me at <a href="mailto:correia@gonzaga.edu">correia@gonzaga.edu</a> for episode suggestions.</p>
-    <button id="themeToggle" class="theme-toggle" type="button">Dark mode on</button>
+    <button id="themeToggle" type="button">Dark mode on</button>
   </header>
 
-  <nav class="picks">
-    <div class="pick reveal">
-      <span class="label">For the Mind</span>
-      <a class="thumb" href="#findingmastery"><img src="gervais.jpg" alt="Michael Gervais"></a>
+  <div class="picks">
+    <div class="pick">
+      <h2>For the Mind</h2>
+      <a href="#findingmastery"><img src="gervais.jpg" alt="Michael Gervais"></a>
     </div>
-    <div class="pick reveal">
-      <span class="label">For the Body</span>
-      <a class="thumb" href="#huberman-lab"><img src="huberman.jpg" alt="Andrew Huberman"></a>
+    <div class="pick">
+      <h2>For the Body</h2>
+      <a href="#huberman-lab"><img src="huberman.jpg" alt="Andrew Huberman"></a>
     </div>
-    <div class="pick reveal">
-      <span class="label">For the Craft</span>
-      <a class="thumb" href="#fridman"><img src="fridman.jpg" alt="Lex Fridman"></a>
+    <div class="pick">
+      <h2>For the Craft</h2>
+      <a href="#fridman"><img src="fridman.jpg" alt="Lex Fridman"></a>
     </div>
-  </nav>
+  </div>
 
-  <section class="card reveal" id="findingmastery">
+  <section id="findingmastery" class="reveal">
     <h2><a href="https://www.youtube.com/@FindingMastery">Finding Mastery</a></h2>
     <div class="video">
       <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw" title="Finding Mastery"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <a class="to-top" href="#top">↑ Back to top</a>
+    <a class="back" href="#top">↑ Back to top</a>
   </section>
 
-  <section class="card reveal" id="huberman-lab">
+  <section id="huberman-lab" class="reveal">
     <h2><a href="https://www.youtube.com/@hubermanlab">Huberman Lab</a></h2>
     <div class="video">
       <iframe src="https://www.youtube.com/embed/pq6WHJzOkno" title="Huberman Lab"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <a class="to-top" href="#top">↑ Back to top</a>
+    <a class="back" href="#top">↑ Back to top</a>
   </section>
 
-  <section class="card reveal" id="fridman">
+  <section id="fridman" class="reveal">
     <h2><a href="https://www.youtube.com/@lexfridman">Lex Fridman Podcast</a></h2>
     <div class="video">
       <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc" title="Lex Fridman Podcast"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <a class="to-top" href="#top">↑ Back to top</a>
+    <a class="back" href="#top">↑ Back to top</a>
   </section>
 
-  <section class="card map-card reveal" id="myembed">
+  <section id="myembed" class="map reveal">
     <h2>Where I study: Gonzaga University</h2>
     <figure style="margin: 0;">
       <img src="gonzaga%20map.jpg" alt="Map of the Gonzaga University campus in Spokane, Washington, with the Gonzaga campus inset and Lake Arthur">
       <figcaption>Gonzaga University campus map</figcaption>
     </figure>
-    <a class="to-top" href="#top">↑ Back to top</a>
+    <a class="back" href="#top">↑ Back to top</a>
   </section>
 
   <footer>Built by Nico Golesis · BMIS 235</footer>
@@ -329,16 +220,16 @@
       toggle.textContent = dark ? 'Dark mode off' : 'Dark mode on';
     });
 
-    const revealObserver = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   </script>
 
 </body>

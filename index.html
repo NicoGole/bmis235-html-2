@@ -4,110 +4,320 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Nico Golesis">
-  <title>Nico Golesis's Podcasts</title>
+  <title>John Correia's Podcasts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #ffffff;
-      color: #1a1a1a;
-      margin: 0;
-      padding: 32px 6%;
-      line-height: 1.6;
+    :root {
+      --bg: #f7f4ee;
+      --surface: #ffffff;
+      --text: #1c1a17;
+      --muted: #6e675d;
+      --accent: #c2410c;
+      --border: rgba(28, 26, 23, 0.1);
+      --shadow: 0 12px 30px rgba(28, 26, 23, 0.08);
+      --speed: 0.4s;
     }
 
     body.dark {
-      background: #121212;
-      color: #f0f0f0;
+      --bg: #0f0f10;
+      --surface: #19191b;
+      --text: #f3efe8;
+      --muted: #a39d94;
+      --accent: #fb923c;
+      --border: rgba(243, 239, 232, 0.1);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
     }
 
-    .picks img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", Arial, Helvetica, sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      transition: background var(--speed) ease, color var(--speed) ease;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { text-decoration: underline; }
+
+    h1, h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 400;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    /* ---------- Header ---------- */
+    .hero {
+      position: relative;
+      padding: 90px 6% 80px;
+      text-align: center;
+      background: linear-gradient(135deg, #1c1a17 0%, #3b1a12 55%, #c2410c 140%);
+      color: #f7f4ee;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -60% auto;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 146, 60, 0.35), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin: 0 0 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      margin-bottom: 18px;
+    }
+
+    .hero p { margin: 0 0 28px; opacity: 0.85; }
+    .hero a { color: #fdba74; }
+
+    .theme-toggle {
+      font: inherit;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f7f4ee;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- Categories ---------- */
+    .picks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1000px;
+      margin: -50px auto 90px;
+      padding: 0 6%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pick {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px 20px 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform var(--speed) ease, box-shadow var(--speed) ease;
+    }
+
+    .pick:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.16);
+    }
+
+    .pick .label {
       display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
     }
 
-    iframe {
+    .pick a.thumb {
+      display: block;
       width: 100%;
-      max-width: 720px;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .pick img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .pick:hover img { transform: scale(1.06); }
+
+    /* ---------- Episode and map cards ---------- */
+    .card {
+      max-width: 880px;
+      margin: 0 auto 60px;
+      padding: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 30px;
+    }
+
+    .card h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-bottom: 22px; }
+    .card h2 a { color: var(--text); }
+    .card h2 a:hover { color: var(--accent); text-decoration: none; }
+
+    .video {
+      position: relative;
+      width: 100%;
       aspect-ratio: 16 / 9;
-      height: auto;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       border: 0;
     }
 
-    section { scroll-margin-top: 24px; padding: 24px 0; }
+    .card .to-top {
+      display: inline-block;
+      margin-top: 22px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-    .map img {
-      width: 100%;
-      max-width: 720px;
-      height: auto;
+    .card .to-top:hover { color: var(--accent); }
+
+    .map-card img {
       display: block;
-      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
     }
 
-    .map figcaption {
-      font-size: 0.9rem;
-      margin-top: 10px;
-      opacity: 0.8;
+    .map-card figcaption {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
     }
 
-    footer { margin-top: 48px; font-size: 0.9rem; opacity: 0.7; }
+    /* ---------- Footer ---------- */
+    footer {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 0 10px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- Fade in on scroll ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ---------- Small screens ---------- */
+    @media (max-width: 800px) {
+      .picks { grid-template-columns: 1fr; margin-top: -40px; }
+      .card { padding: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body id="top">
 
-  <button id="themeToggle" type="button">Dark mode on</button>
+  <header class="hero">
+    <p class="eyebrow">Episode picks</p>
+    <h1>Professor Correia's Podcasts</h1>
+    <p>Email me at <a href="mailto:correia@gonzaga.edu">correia@gonzaga.edu</a> for episode suggestions.</p>
+    <button id="themeToggle" class="theme-toggle" type="button">Dark mode on</button>
+  </header>
 
-  <h1>Nico Golesis's Podcasts</h1>
-  <p>Email me at <a href="mailto:correia@gonzaga.edu">correia@gonzaga.edu</a> for episode suggestions.</p>
+  <nav class="picks">
+    <div class="pick reveal">
+      <span class="label">For the Mind</span>
+      <a class="thumb" href="#findingmastery"><img src="gervais.jpg" alt="Michael Gervais"></a>
+    </div>
+    <div class="pick reveal">
+      <span class="label">For the Body</span>
+      <a class="thumb" href="#huberman-lab"><img src="huberman.jpg" alt="Andrew Huberman"></a>
+    </div>
+    <div class="pick reveal">
+      <span class="label">For the Craft</span>
+      <a class="thumb" href="#fridman"><img src="fridman.jpg" alt="Lex Fridman"></a>
+    </div>
+  </nav>
 
-  <h2>For the Mind</h2>
-  <p class="picks">
-    <a href="#findingmastery"><img src="gervais.jpg" alt="Michael Gervais"></a>
-  </p>
-
-  <h2>For the Body</h2>
-  <p class="picks">
-    <a href="#huberman-lab"><img src="huberman.jpg" alt="Andrew Huberman"></a>
-  </p>
-
-  <h2>For the Craft</h2>
-  <p class="picks">
-    <a href="#fridman"><img src="fridman.jpg" alt="Lex Fridman"></a>
-  </p>
-
-  <section id="findingmastery">
+  <section class="card reveal" id="findingmastery">
     <h2><a href="https://www.youtube.com/@FindingMastery">Finding Mastery</a></h2>
-    <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw" title="Finding Mastery"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-    <p><a href="#top">To top</a></p>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw" title="Finding Mastery"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <a class="to-top" href="#top">↑ Back to top</a>
   </section>
 
-  <section id="huberman-lab">
+  <section class="card reveal" id="huberman-lab">
     <h2><a href="https://www.youtube.com/@hubermanlab">Huberman Lab</a></h2>
-    <iframe src="https://www.youtube.com/embed/pq6WHJzOkno" title="Huberman Lab"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-    <p><a href="#top">To top</a></p>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/pq6WHJzOkno" title="Huberman Lab"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <a class="to-top" href="#top">↑ Back to top</a>
   </section>
 
-  <section id="fridman">
+  <section class="card reveal" id="fridman">
     <h2><a href="https://www.youtube.com/@lexfridman">Lex Fridman Podcast</a></h2>
-    <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc" title="Lex Fridman Podcast"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
-    <p><a href="#top">To top</a></p>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc" title="Lex Fridman Podcast"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <a class="to-top" href="#top">↑ Back to top</a>
   </section>
 
-  <section id="myembed" class="map">
+  <section class="card map-card reveal" id="myembed">
     <h2>Where I study: Gonzaga University</h2>
-    <figure>
+    <figure style="margin: 0;">
       <img src="gonzaga%20map.jpg" alt="Map of the Gonzaga University campus in Spokane, Washington, with the Gonzaga campus inset and Lake Arthur">
       <figcaption>Gonzaga University campus map</figcaption>
     </figure>
-    <p><a href="#top">To top</a></p>
+    <a class="to-top" href="#top">↑ Back to top</a>
   </section>
 
   <footer>Built by Nico Golesis · BMIS 235</footer>
@@ -118,6 +328,17 @@
       const dark = document.body.classList.toggle('dark');
       toggle.textContent = dark ? 'Dark mode off' : 'Dark mode on';
     });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
   </script>
 
 </body>

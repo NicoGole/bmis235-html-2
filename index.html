@@ -13,7 +13,6 @@
       margin: 0;
       padding: 32px 6%;
       line-height: 1.6;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     body.dark {
@@ -21,42 +20,12 @@
       color: #f0f0f0;
     }
 
-    .theme-toggle {
-      font-size: 0.9rem;
-      padding: 6px 14px;
-      cursor: pointer;
-      border: 1px solid currentColor;
-      background: none;
-      color: inherit;
-      border-radius: 4px;
-    }
-
-    .picks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-      margin: 32px 0;
-    }
-
-    .picks a img {
+    .picks img {
       width: 180px;
       height: 180px;
       object-fit: cover;
       border-radius: 8px;
       display: block;
-    }
-
-    .picks h3 {
-      text-align: center;
-      font-size: 1rem;
-      margin: 0 0 8px;
-    }
-
-    section.episode {
-      scroll-margin-top: 24px;
-      padding: 24px 0;
-      border-top: 1px solid rgba(128, 128, 128, 0.3);
     }
 
     iframe {
@@ -67,77 +36,78 @@
       border: 0;
     }
 
-    .to-top {
-      display: inline-block;
-      margin-top: 12px;
+    section { scroll-margin-top: 24px; padding: 24px 0; }
+
+    .map img {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      border-radius: 8px;
     }
 
-    footer {
-      margin-top: 48px;
+    .map figcaption {
       font-size: 0.9rem;
-      opacity: 0.7;
+      margin-top: 10px;
+      opacity: 0.8;
     }
+
+    footer { margin-top: 48px; font-size: 0.9rem; opacity: 0.7; }
   </style>
 </head>
 <body id="top">
 
-  <button class="theme-toggle" id="themeToggle" type="button">Dark mode on</button>
+  <button id="themeToggle" type="button">Dark mode on</button>
 
   <h1>Professor Correia's Podcasts</h1>
   <p>Email me at <a href="mailto:correia@gonzaga.edu">correia@gonzaga.edu</a> for episode suggestions.</p>
 
-  <nav class="picks">
-    <div>
-      <h3>For the Mind</h3>
-      <a href="#findingmastery">
-        <img src="gervais.jpg" alt="Michael Gervais">
-      </a>
-    </div>
-    <div>
-      <h3>For the Body</h3>
-      <a href="#huberman-lab">
-        <img src="huberman.jpg" alt="Andrew Huberman">
-      </a>
-    </div>
-    <div>
-      <h3>For the Craft</h3>
-      <a href="#fridman">
-        <img src="fridman.jpg" alt="Lex Fridman">
-      </a>
-    </div>
-  </nav>
+  <h2>For the Mind</h2>
+  <p class="picks">
+    <a href="#findingmastery"><img src="https://nicogole.github.io/bmis235-html-2/gervais.jpg" alt="Michael Gervais"></a>
+  </p>
 
-  <section class="episode" id="findingmastery">
+  <h2>For the Body</h2>
+  <p class="picks">
+    <a href="#huberman-lab"><img src="https://nicogole.github.io/bmis235-html-2/huberman.jpg" alt="Andrew Huberman"></a>
+  </p>
+
+  <h2>For the Craft</h2>
+  <p class="picks">
+    <a href="#fridman"><img src="https://nicogole.github.io/bmis235-html-2/fridman.jpg" alt="Lex Fridman"></a>
+  </p>
+
+  <section id="findingmastery">
     <h2><a href="https://www.youtube.com/@FindingMastery">Finding Mastery</a></h2>
-    <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw"
-      title="Finding Mastery"
+    <iframe src="https://www.youtube.com/embed/4L98ssI5Vxw" title="Finding Mastery"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
-    <a class="to-top" href="#top">To top</a>
+    <p><a href="#top">To top</a></p>
   </section>
 
-  <section class="episode" id="huberman-lab">
+  <section id="huberman-lab">
     <h2><a href="https://www.youtube.com/@hubermanlab">Huberman Lab</a></h2>
-    <iframe src="https://www.youtube.com/embed/pq6WHJzOkno"
-      title="Huberman Lab"
+    <iframe src="https://www.youtube.com/embed/pq6WHJzOkno" title="Huberman Lab"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
-    <a class="to-top" href="#top">To top</a>
+    <p><a href="#top">To top</a></p>
   </section>
 
-  <section class="episode" id="fridman">
+  <section id="fridman">
     <h2><a href="https://www.youtube.com/@lexfridman">Lex Fridman Podcast</a></h2>
-    <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc"
-      title="Lex Fridman Podcast"
+    <iframe src="https://www.youtube.com/embed/kFQUDCgMjRc" title="Lex Fridman Podcast"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
-    <a class="to-top" href="#top">To top</a>
+    <p><a href="#top">To top</a></p>
   </section>
 
-  <section class="episode" id="my-embed">
-    <h2>My Embed</h2>
-    <!-- Paste an embed iframe from another site here, such as a Google Maps or chart embed. -->
-    <a class="to-top" href="#top">To top</a>
+  <section id="myembed" class="map">
+    <h2>Where I study: Gonzaga University</h2>
+    <figure>
+      <img src="gonzaga_map.jpg" alt="Map of the Gonzaga University campus in Spokane, Washington, with the Gonzaga campus inset and Lake Arthur">
+      <figcaption>Gonzaga University campus map</figcaption>
+    </figure>
+    <p><a href="#top">To top</a></p>
   </section>
 
   <footer>Built by Nico Golesis · BMIS 235</footer>
@@ -146,7 +116,7 @@
     const toggle = document.getElementById('themeToggle');
     toggle.addEventListener('click', () => {
       const dark = document.body.classList.toggle('dark');
-      toggle.textContent = dark ? 'Light mode on' : 'Dark mode on';
+      toggle.textContent = dark ? 'Dark mode off' : 'Dark mode on';
     });
   </script>
 
